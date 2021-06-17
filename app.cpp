@@ -10,7 +10,6 @@
 #include "Zumo.h"
 #include "Milkcocoa.h"
 
-
 #define DELTA_T 0.005
 #define KP 0.0
 #define KI 0.0
@@ -58,8 +57,8 @@ float pid(int irValue, int targValue){
 
 void isrRx() {
     char ch;
-    ch = pc.getc();         // 1•¶šóMƒoƒbƒtƒ@‚æ‚èæ‚èo‚µ
-    pc.putc(ch);            // ‘—M
+    ch = pc.getc();         // 1æ–‡å­—å—ä¿¡ãƒãƒƒãƒ•ã‚¡ã‚ˆã‚Šå–ã‚Šå‡ºã—
+    pc.putc(ch);            // é€ä¿¡
     if(ch == 's'){
     	tank_sta=STOP_TANK;
     	tank_sp_l = 0;
@@ -104,15 +103,6 @@ void isrRx() {
 	}
 }
 
-/*
-void onpush(MQTT::MessageData& md)
-{
-	pc.printf("onpush\n\r");
-    MQTT::Message &message = md.message;
-    DataElement de = DataElement((char*)message.payload);
-	int v = de.getInt("z");
-}
-*/
 void task_main(intptr_t exinf) {
 	int k;
 	pc.baud(9600);
@@ -125,19 +115,6 @@ void task_main(intptr_t exinf) {
 	pc.attach(isrRx, Serial::RxIrq);
 
 	while(1){
-		//zumo.readIr(irbits);
-		//zumo.readAnalogIrValue(irVal);
-		//short x,y,z;
-		//zumo.getMagetism(&x,&y,&z);
-		//int op = pid(250,250);
-		//short px=-2160;
-		//short py=6675;
-		//pc.printf("%d %d %d\r\n",x,y,z);
-		//k = pc.getc();
-		//pc.printf("%d\r\n",k);
-		//pc.putc(pc.getc());
-		//pc.printf("hello \r\n");
-
 		zumo.driveTank(tank_sp_r,tank_sp_l);
 	}
 }
